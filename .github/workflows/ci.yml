@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
- unit-tests:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -47,4 +47,3 @@ jobs:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
       - name: Release this commit
         run: ansible-playbook -i deploy/inventory.ini deploy/playbook.yml --private-key ~/.ssh/deploy_key -e revision="$GITHUB_SHA"
-
