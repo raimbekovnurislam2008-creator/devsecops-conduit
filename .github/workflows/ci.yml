@@ -3,7 +3,8 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  deploy:
+    deploy:
+    needs: [unit-tests, secret-scan]
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
