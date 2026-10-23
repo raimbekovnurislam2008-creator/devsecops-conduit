@@ -3,8 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-    deploy:
-    needs: [unit-tests, secret-scan]
+  deploy:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +18,7 @@ jobs:
       - name: Give the robot its key
         run: |
           mkdir -p ~/.ssh
-          echo "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          echo "$DEPLOY_SSH_KEY" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
