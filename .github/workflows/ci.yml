@@ -19,7 +19,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           cat << 'EOF' > ~/.ssh/deploy_key
-          ${{ secrets.DEPLOY_SSH_KEY }}
+          ${{ secrets.KIKIKIKI }}
           EOF
           chmod 600 ~/.ssh/deploy_key
       - name: Release this commit
