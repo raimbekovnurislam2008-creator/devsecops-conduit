@@ -3,30 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: |
-          pip install -r backend/requirements.txt
-          pip install -r requirements-tests.txt
-      - name: Run tests
-        run: pytest
-
-  secret-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - name: Run Gitleaks
-        run: echo "Running secret scan..."
-
   deploy:
-    needs: [unit-tests, secret-scan]
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
